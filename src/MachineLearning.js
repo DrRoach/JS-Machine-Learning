@@ -24,7 +24,7 @@ function MachineLearning() {
             var calculate = getBestNeighbour(optima, neighbourFitnesses);
 
             // If we get false then our optima is reached
-            if (calculate === false) {
+            if (calculate === true) {
                 break;
             }
 
