@@ -1,23 +1,28 @@
+
+
 function MachineLearning() {
     this.OUTPUT_ARRAY = 1;
     this.OUTPUT_SINGLE = 2;
 
-    this.hillclimb = function(data, output = this.OUTPUT_SINGLE) {
+    this.INPUT_LINEAR = 3;
+    this.INPUT_XY = 4;
+
+    this.hillclimb = function(data, input = this.INPUT_LINEAR,  output = this.OUTPUT_SINGLE) {
         var pos = 0;
+
         // Generate starting position in data
         if (output == this.OUTPUT_ARRAY) {
             // Generate an array of our optima
             var pos = chooseRandomArrayInput(data);
-            var optima = measureDistance(pos, data);
+            var optima = measureDistance(pos, data, input);
         } else {
             var pos = chooseRandomPosition(data.length);
             // Loop until we find optima
             var optima = data[pos];
         }
-        
+
         // Killswitch to prevent us getting stuck in infinite loop
-        //  Default is the size of our dataset
-        var killswitch = 1000;
+        var killswitch = 100000;
 
         do {
             killswitch--;
@@ -33,8 +38,8 @@ function MachineLearning() {
 
                 // Calculate our fitnesses for our neighbours
                 var neighbourFitnesses = [
-                    measureDistance(neighbourPositions[0], data),
-                    measureDistance(neighbourPositions[1], data)
+                    measureDistance(neighbourPositions[0], data, input),
+                    measureDistance(neighbourPositions[1], data, input)
                 ];
             } else {
                 // Get our highest neighbour fitness and position
@@ -72,20 +77,39 @@ function MachineLearning() {
         };
     }
 
-    var measureDistance = function(pos, data) {
+    var measureDistance = function(pos, data, input) {
         // Get the distance between each of our outputs
         var distance = 0;
 
         for (var i = 0; i < pos.length; i++) {
-            var next = pos[i + 1];
+            if (input == 3) {
+                var next = pos[i + 1];
 
-            if (next > (pos.length - 1)) {
-                next = 0;
-            } else if (typeof next == "undefined") {
-                next = pos[0];
+                if (next > (pos.length - 1)) {
+                    next = 0;
+                } else if (typeof next == "undefined") {
+                    next = pos[0];
+                }
+                distance += data[pos[i]][next];
+            } else if (input == 4) {
+                var next = i + 1;
+                if (next >= pos.length) {
+                    next = 0;
+                }
+
+                // Work out our x and y differences
+                var xDiff = data[pos[i]][0] - data[pos[next]][0];
+                if (xDiff < 0) {
+                    xDiff = xDiff * -1;
+                }
+
+                var yDiff = data[pos[i]][1] - data[pos[next]][1];
+                if (yDiff < 0) {
+                    yDiff = yDiff * -1;
+                }
+
+                distance += xDiff + yDiff;
             }
-
-            distance += data[pos[i]][next];
         }
 
         return distance;
