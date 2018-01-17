@@ -1,24 +1,49 @@
 function MachineLearning() {
-    this.hillclimb = function(data) {
-        // Generate starting position in data
-        var pos = chooseRandomPosition(data.length);
+    this.OUTPUT_ARRAY = 1;
+    this.OUTPUT_SINGLE = 2;
 
-        // Loop until we find optima
-        var optima = data[pos];        
+    this.hillclimb = function(data, output = this.OUTPUT_SINGLE) {
+        var pos = 0;
+        // Generate starting position in data
+        if (output == this.OUTPUT_ARRAY) {
+            // Generate an array of our optima
+            var pos = chooseRandomArrayInput(data);
+            var optima = measureDistance(pos, data);
+        } else {
+            var pos = chooseRandomPosition(data.length);
+            // Loop until we find optima
+            var optima = data[pos];
+        }
         
         // Killswitch to prevent us getting stuck in infinite loop
         //  Default is the size of our dataset
-        var killswitch = data.length;
+        var killswitch = 1000;
 
         do {
             killswitch--;
 
-            // Get our highest neighbour fitness and position
-            neighbourPositions = getNeighbourPositions(pos, data);
-            neighbourFitnesses = [
-                data[neighbourPositions[0]],
-                data[neighbourPositions[1]]
-            ];
+            // Make sure that our neighbour positions are available
+            var neighbourPositions;
+
+            // Make sure that we set our neighbour positions correctly
+            if (output == this.OUTPUT_ARRAY) {
+
+                // Generate our neighbours as array inputs
+                neighbourPositions = getNeighbourArrayPositions(pos, data);
+
+                // Calculate our fitnesses for our neighbours
+                var neighbourFitnesses = [
+                    measureDistance(neighbourPositions[0], data),
+                    measureDistance(neighbourPositions[1], data)
+                ];
+            } else {
+                // Get our highest neighbour fitness and position
+                neighbourPositions = getNeighbourPositions(pos, data);
+                var neighbourFitnesses = [
+                    data[neighbourPositions[0]],
+                    data[neighbourPositions[1]]
+                ];
+            }
             
             // Get our fittest neightbour
             var calculate = getBestNeighbour(optima, neighbourFitnesses);
@@ -32,15 +57,67 @@ function MachineLearning() {
             optima = neighbourFitnesses[calculate];
 
             // Update our position in our data
-            //  If calculate has returned 1 we must move up our data else down
+            //  If calculate has returned 1 our neighbour at position[1] is the
+            //  best neighbour else it's position[0]
             if (calculate == 1) {
-                pos++;
+                pos = neighbourPositions[1];
             } else {
-                pos--;
+                pos = neighbourPositions[0];
             }
         } while (killswitch >= 0);
 
-        return optima;
+        return {
+            "optima": optima,
+            "pos": pos
+        };
+    }
+
+    var measureDistance = function(pos, data) {
+        // Get the distance between each of our outputs
+        var distance = 0;
+
+        for (var i = 0; i < pos.length; i++) {
+            var next = pos[i + 1];
+
+            if (next > (pos.length - 1)) {
+                next = 0;
+            } else if (typeof next == "undefined") {
+                next = pos[0];
+            }
+
+            distance += data[pos[i]][next];
+        }
+
+        return distance;
+    }
+
+    var chooseRandomArrayInput = function(data) {
+        var pos = chooseRandomPosition(data.length);
+        
+        // Set our response array length
+        var resp = [data.length];
+
+        // Loop through our data inputs
+        for (var i = 0; i < data.length; i++) {
+
+            // Check to see if is position already exists
+            while (resp.includes(pos)) {
+                // If we are at the end of our data input loop to the start
+                if (pos == (data.length - 1)) {
+                    pos = 0;
+                } else {
+                    pos++;
+                }
+            }
+
+            // Add the position to our response
+            resp[i] = pos;
+
+            // Generate next position
+            pos = chooseRandomPosition(data.length);
+        }
+
+        return resp;
     }
     
     /**
@@ -55,6 +132,62 @@ function MachineLearning() {
         // Make sure we keep within our array constraints
         var downNeighbour = ((pos > 0) ? (pos - 1) : 0);
         var upNeighbour   = ((pos < (data.length - 1)) ? (pos + 1) : (data.length - 1));
+
+        return [
+            downNeighbour,
+            upNeighbour
+        ];
+    }
+
+    /**
+     * Get our two closest neighbours to array input
+     *
+     * Using our array input, say {2,4,3,1,0}, if we are switching on position 2 then we
+     *  must generate the two following closest neighbours: {2,3,4,1,0} and {2,4,1,3,0}.
+     */
+    var getNeighbourArrayPositions = function(pos, data) {
+        // Generate random switch position
+        var switchPos = chooseRandomPosition(data.length);
+        switchPos = pos.length - 1;
+
+        // Create our two neighbour arrays
+        var downNeighbour = [pos.length];
+        var upNeighbour = [pos.length];
+
+        // Make sure that we build our next neighbour arrays correctly
+        for (var i = 0; i < pos.length; i++) {
+            switch (i) {
+                case (switchPos - 1):
+                    downNeighbour[i] = pos[i + 1];
+                    upNeighbour[i] = pos[i];
+                    break;
+                case switchPos:
+                    var wrapPos = i;
+                    if (switchPos == (pos.length - 1)) {
+                        wrapPos = -1;
+                        upNeighbour[0] = pos[i];
+                    }
+                    upNeighbour[i] = pos[wrapPos + 1];
+
+                    wrapPos = i;
+                    if (switchPos == 0) {
+                        wrapPos = pos.length;
+                    }
+                    downNeighbour[i] = pos[wrapPos - 1];
+                    break;
+                case (switchPos + 1):
+                    upNeighbour[i] = pos[i - 1];
+                    downNeighbour[i] = pos[i];
+                    break;
+                default:
+                    var wrapPos = i;
+                    if (switchPos == 0 && i == (pos.length - 1)) {
+                        wrapPos = 0;
+                    }
+                    downNeighbour[i] = pos[wrapPos];
+                    upNeighbour[i] = pos[i];
+            }
+        }
 
         return [
             downNeighbour,
