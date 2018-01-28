@@ -12,6 +12,7 @@ function MachineLearning() {
 
     this.hillclimb = function(data, objFunction = this.MAXIMISE, input = this.INPUT_LINEAR,  output = this.OUTPUT_SINGLE) {
         var pos = 0;
+        var path = [];
 
         // Generate starting position in data
         if (output == this.OUTPUT_ARRAY) {
@@ -56,6 +57,8 @@ function MachineLearning() {
             // Get our fittest neightbour
             var calculate = getBestNeighbour(optima, neighbourFitnesses, objFunction);
 
+            path.push(pos);
+
             // If we get false then our optima is reached
             if (calculate === true) {
                 break;
@@ -76,7 +79,8 @@ function MachineLearning() {
 
         return {
             "optima": optima,
-            "pos": pos
+            "pos": pos,
+            "path": path
         };
     }
 
