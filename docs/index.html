@@ -1,1 +1,40 @@
-<h1>JS Machine Learner</h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+        <link href="css/main.css" type="text/css" rel="stylesheet">
+
+        <script src="../src/MachineLearning.js"></script>
+    </head>
+    <body>
+        <h1>JS Machine Learner</h1>
+        <p>This machine learning library is intended to bring all of the powers of machine learning into the browser. It will be continuously updated and who knows, maybe one day it might be at the forefront of it's field.</p>
+
+        <div class="example">
+            <h3>Simple Hill Climbing</h3>
+            <canvas id="simple_hill" width="500" height="300"></canvas>
+
+            <script>
+                var ml = new MachineLearning();
+                var data = [
+                    8,
+                    14,
+                    21,
+                    28,
+                    22,
+                    18,
+                    14,
+                    8,
+                    5,
+                    2
+                ];
+                var ctx = document.getElementById("simple_hill").getContext("2d");
+
+                for (var i = 0; i < data.length; i++) {
+                    ctx.fillRect(((i * 50) + 25), (300 - (data[i] * 10)), 3, 3);
+                }
+
+            </script>
+        </div>
+    </body>
+</html>
