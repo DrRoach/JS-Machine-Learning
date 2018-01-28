@@ -1,0 +1,23 @@
+h1 {
+    font-family: "Roboto Mono", serif;
+    text-align: center;
+}
+
+p {
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+}
+
+.example h3 {
+    text-align: center;
+}
+
+.example canvas {
+    margin: auto;
+    display: block;
+}
+
+#simple_hill {
+    background: red;
+}
