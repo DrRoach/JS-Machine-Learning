@@ -7,7 +7,10 @@ function MachineLearning() {
     this.INPUT_LINEAR = 3;
     this.INPUT_XY = 4;
 
-    this.hillclimb = function(data, input = this.INPUT_LINEAR,  output = this.OUTPUT_SINGLE) {
+    this.MAXIMISE = 5;
+    this.MINIMISE = 6;
+
+    this.hillclimb = function(data, objFunction = this.MAXIMISE, input = this.INPUT_LINEAR,  output = this.OUTPUT_SINGLE) {
         var pos = 0;
 
         // Generate starting position in data
@@ -51,7 +54,7 @@ function MachineLearning() {
             }
             
             // Get our fittest neightbour
-            var calculate = getBestNeighbour(optima, neighbourFitnesses);
+            var calculate = getBestNeighbour(optima, neighbourFitnesses, objFunction);
 
             // If we get false then our optima is reached
             if (calculate === true) {
@@ -228,21 +231,40 @@ function MachineLearning() {
      *  return it's position in the neighbours array
      *   
      */
-    var getBestNeighbour = function(optima, neighbours) {
+    var getBestNeighbour = function(optima, neighbours, objFunction) {
         // Compare our two neighbours
         var fittestNeighbour = null;
-        if (neighbours[0] > neighbours[1]) {
-            fittestNeighbour = 0;
-        } else {
-            fittestNeighbour = 1;
+
+        // TODO: Don't hardcode
+        if (objFunction == 5) {
+            if (neighbours[0] > neighbours[1]) {
+                fittestNeighbour = 0;
+            } else {
+                fittestNeighbour = 1;
+            }
+        } else if (objFunction == 6) {
+            if (neighbours[0] < neighbours[1]) {
+                fittestNeighbour = 0;
+            } else {
+                fittestNeighbour = 1;
+            }
         }
 
+        if (objFunction == 5) {
         // Compare our fittest neighbour and optima
-        if (optima > neighbours[fittestNeighbour]) {
-            // We have reached our optima
-            return true;
+            if (optima > neighbours[fittestNeighbour]) {
+                // We have reached our optima
+                return true;
+            } else {
+                return fittestNeighbour;
+            }
         } else {
-            return fittestNeighbour;
+            if (optima < neighbours[fittestNeighbour]) {
+                // We have reached our optima
+                return true;
+            } else {
+                return fittestNeighbour;
+            }
         }
     }
 
