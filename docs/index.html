@@ -5,7 +5,9 @@ title: JS Machine Learner
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet"> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
         <link href="css/main.css" type="text/css" rel="stylesheet">
 
         <script src="src/MachineLearning.js"></script>
@@ -17,6 +19,10 @@ title: JS Machine Learner
         <div class="example">
             <h3>Simple Hill Climbing</h3>
             <canvas id="simple_hill" width="500" height="300"></canvas>
+            <div class="results">
+                <h5>Optima: <span class="optima">0</span></h5>
+                <h5>Iterations: <span class="iterations">0</span></h5>
+            </div>
 
             <script>
                 var ml = new MachineLearning();
@@ -38,6 +44,20 @@ title: JS Machine Learner
                     ctx.fillRect(((i * 50) + 25), (300 - (data[i] * 10)), 3, 3);
                 }
 
+				var run = ml.hillclimb(data);
+
+				for (var i = 0; i < run.path.length; i++) {
+					ctx.beginPath();
+					ctx.moveTo((run.path[i] * 50) + 25, (300 - (data[run.path[i]] * 10)));
+					ctx.lineTo((run.path[i + 1] * 50) + 25, (300 - (data[run.path[i + 1]] * 10)));
+					ctx.stroke();
+				}
+
+                var results = $('#simple_hill').parent().find('.results');
+                results.find('.optima').html(run.optima);
+                results.find('.iterations').html(run.path.length);
+
+                console.log(results);
             </script>
         </div>
     </body>
