@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet"> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
         <link href="css/main.css" type="text/css" rel="stylesheet">
 
-        <script src="/src/MachineLearning.js"></script>
+        <script src="src/MachineLearning.js"></script>
     </head>
     <body>
         <h1>JS Machine Learner</h1>
@@ -13,6 +15,11 @@
         <div class="example">
             <h3>Simple Hill Climbing</h3>
             <canvas id="simple_hill" width="500" height="300"></canvas>
+            <div class="results">
+                <h5>Optima: <span class="optima">0</span></h5>
+                <h5>Iterations: <span class="iterations">0</span></h5>
+            </div>
+            <div class="clear"></div>
 
             <script>
                 var ml = new MachineLearning();
@@ -34,6 +41,46 @@
                     ctx.fillRect(((i * 50) + 25), (300 - (data[i] * 10)), 3, 3);
                 }
 
+				var run = ml.hillclimb(data);
+
+				for (var i = 0; i < run.path.length; i++) {
+					ctx.beginPath();
+					ctx.moveTo((run.path[i] * 50) + 25, (300 - (data[run.path[i]] * 10)));
+					ctx.lineTo((run.path[i + 1] * 50) + 25, (300 - (data[run.path[i + 1]] * 10)));
+					ctx.stroke();
+				}
+
+                var results = $('#simple_hill').parent().find('.results');
+                results.find('.optima').html(run.optima);
+                results.find('.iterations').html(run.path.length);
+
+                console.log(results);
+            </script>
+        </div>
+
+        <div class="example" id="bayes">
+            <h3>Bayes Predictions</h3>
+            <p>Test data used are 10 fixtures between Manchester United and Manchester City. First game was on 8 Apr 2013, last game was 27 Apr 2017</p>
+            <div class="results">
+                <h5>Probability: <span class="optima">0</span></h5>
+                <h5>Output: <span class="iterations">0</span></h5>
+            </div>
+            <div class="clear"></div>
+            <p>The correct outcome for the match was L for Manchester United. The outcome games was played 10 Dec 2017</p>
+
+            <script>
+                console.log("BAYES");
+                var ml = new MachineLearning();
+                var inputs = [["h", "a", "h", "a", "h", "h", "a", "h", "h", "a"]];
+                var outputs = ["l", "l", "l", "l", "w", "d", "w", "l", "w", "d"];
+                var next = ["h"];
+
+                var bayes = ml.bayes(inputs, outputs, next);
+
+                var results = $('#bayes').find('.results');
+                results.find('.optima').html(bayes.probability);
+                results.find('.iterations').html(bayes.output.toUpperCase());
+                
             </script>
         </div>
     </body>
