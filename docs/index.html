@@ -23,6 +23,7 @@ title: JS Machine Learner
                 <h5>Optima: <span class="optima">0</span></h5>
                 <h5>Iterations: <span class="iterations">0</span></h5>
             </div>
+            <div class="clear"></div>
 
             <script>
                 var ml = new MachineLearning();
@@ -58,6 +59,20 @@ title: JS Machine Learner
                 results.find('.iterations').html(run.path.length);
 
                 console.log(results);
+            </script>
+        </div>
+
+        <div class="example">
+            <h3>Bayes Predictions</h3>
+
+            <script>
+                console.log("BAYES");
+                var ml = new MachineLearning();
+                var inputs = [["h", "a", "h", "h", "a"]];
+                var outputs = ["d", "w", "l", "w", "d"];
+                var next = ["h"];
+                console.log(ml.bayes(inputs, outputs, next));
+                
             </script>
         </div>
     </body>
