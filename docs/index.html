@@ -62,16 +62,28 @@ title: JS Machine Learner
             </script>
         </div>
 
-        <div class="example">
+        <div class="example" id="bayes">
             <h3>Bayes Predictions</h3>
+            <p>Test data used are 10 fixtures between Manchester United and Manchester City. First game was on 8 Apr 2013, last game was 27 Apr 2017</p>
+            <div class="results">
+                <h5>Probability: <span class="optima">0</span></h5>
+                <h5>Output: <span class="iterations">0</span></h5>
+            </div>
+            <div class="clear"></div>
+            <p>The correct outcome for the match was L for Manchester United. The outcome games was played 10 Dec 2017</p>
 
             <script>
                 console.log("BAYES");
                 var ml = new MachineLearning();
-                var inputs = [["h", "a", "h", "h", "a"]];
-                var outputs = ["d", "w", "l", "w", "d"];
+                var inputs = [["h", "a", "h", "a", "h", "h", "a", "h", "h", "a"]];
+                var outputs = ["l", "l", "l", "l", "w", "d", "w", "l", "w", "d"];
                 var next = ["h"];
-                console.log(ml.bayes(inputs, outputs, next));
+
+                var bayes = ml.bayes(inputs, outputs, next);
+
+                var results = $('#bayes').find('.results');
+                results.find('.optima').html(bayes.probability);
+                results.find('.iterations').html(bayes.output.toUpperCase());
                 
             </script>
         </div>
