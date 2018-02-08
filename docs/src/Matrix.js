@@ -29,9 +29,15 @@ class Matrix {
     }
 
     add(num) {
-        this.map(function(data) {
-            return data + num;
-        });
+        if (num instanceof Matrix) {
+            this.map(function(data, r, c) {
+                return data + num.data[r][c];
+            });
+        } else {
+            this.map(function(data) {
+                return data + num;
+            });
+        }
     }
 
     multiply(num) {
@@ -63,5 +69,15 @@ class Matrix {
                 this.data[i][x] = func(this.data[i][x], i, x);
             }
         }
+    }
+
+    static fromArray(array) {
+        var respMatrix = new Matrix(array.length, 1);
+
+        for (var i = 0; i < array.length; i++) {
+            respMatrix.data[i][0] = array[i];
+        }
+
+        return respMatrix;
     }
 }
