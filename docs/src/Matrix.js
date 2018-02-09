@@ -24,7 +24,7 @@ class Matrix {
 
     randomize() {
         this.map(function() {
-            return Math.floor(Math.random() * 10);
+            return Math.random() * 2 - 1;
         });
     }
 
@@ -40,10 +40,26 @@ class Matrix {
         }
     }
 
-    multiply(num) {
-        this.map(function multiply(data) {
-            return data * num;
+    static subtract(matrix1, matrix2) {
+        var respMatrix = new Matrix(matrix1.rows, matrix1.cols);
+
+        respMatrix.map(function(data, r, c) {
+            return matrix1.data[r][c] - matrix2.data[r][c];
         });
+
+        return respMatrix;
+    }
+
+    multiply(num) {
+        if (num instanceof Matrix) {
+            this.map(function(data, r, c) {
+                return data * num.data[r][c];
+            });
+        } else {
+            this.map(function(data) {
+                return data * num;
+            });
+        }
     }
 
     static multiply(matrix1, matrix2) {
@@ -62,6 +78,16 @@ class Matrix {
         return resMatrix;
     }
 
+    static transpose(matrix) {
+        var respMatrix = new Matrix(matrix.cols, matrix.rows);
+
+        respMatrix.map(function(data, r, c) {
+            return matrix.data[c][r];
+        });
+
+        return respMatrix;
+    }
+
     // Global map function to apply function to all data
     map(func) {
         for (var i = 0; i < this.rows; i++) {
@@ -69,6 +95,18 @@ class Matrix {
                 this.data[i][x] = func(this.data[i][x], i, x);
             }
         }
+    }
+
+    static map(matrix, func) {
+        var respMatrix = new Matrix(matrix.rows, matrix.cols);
+
+        for (var i = 0; i < respMatrix.rows; i++) {
+            for (var x = 0; x < respMatrix.cols; x++) {
+                respMatrix.data[i][x] = func(matrix.data[i][x], i, x);
+            }
+        }
+
+        return respMatrix;
     }
 
     static fromArray(array) {
@@ -79,5 +117,15 @@ class Matrix {
         }
 
         return respMatrix;
+    }
+
+    toArray() {
+        var respArray = new Array();
+        for (var i = 0; i < this.rows; i++) {
+            for (var x = 0; x < this.cols; x++) {
+                respArray.push(this.data[i][x]);
+            }
+        }
+        return respArray;
     }
 }
