@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono|Roboto" rel="stylesheet"> 
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
         <link href="css/main.css" type="text/css" rel="stylesheet">
 
         <script src="src/MachineLearning.js"></script>
+        <script src="src/Matrix.js"></script>
+        <script src="src/NeuralNetwork.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
         <h1>JS Machine Learner</h1>
-        <p>This machine learning library is intended to bring all of the powers of machine learning into the browser. It will be continuously updated and who knows, maybe one day it might be at the forefront of it's field.</p>
+        <p>This machine learning library is intended to bring all of the powers of machine learning into the browser and make it easy to implement algorithms into websites.</p>
 
         <p>Visit the Github repo <a target="_blank" href="https://github.com/DrRoach/JSMachineLearner">here</a></p>
 
@@ -58,8 +63,6 @@
                 var results = $('#simple_hill').parent().find('.results');
                 results.find('.optima').html(run.optima);
                 results.find('.iterations').html(run.path.length);
-
-                console.log(results);
             </script>
         </div>
 
@@ -77,7 +80,6 @@
             <p>The correct outcome for the match was L for Manchester United. The outcome games was played 10 Dec 2017</p>
 
             <script>
-                console.log("BAYES");
                 var ml = new MachineLearning();
                 var inputs = [["h", "a", "h", "a", "h", "h", "a", "h", "h", "a"]];
                 var outputs = ["l", "l", "l", "l", "w", "d", "w", "l", "w", "d"];
@@ -88,8 +90,110 @@
                 var results = $('#bayes').find('.results');
                 results.find('.optima').html(bayes.probability);
                 results.find('.iterations').html(bayes.output.toUpperCase());
-                
             </script>
+        </div>
+
+        <div class="example" id="neural_network">
+            <h3>Neural Networks</h3>
+
+            <p>Neural networks can be trained to learn from a set of given inputs with their corresponsing outputs. As neural networks "learn" they see patterns that humans may not see.</p>
+
+            <p>The following example shows how a neural network can be trained to learn the outcomes of a XOR gate.</p>
+
+            <table>
+                <thead>
+                <tr>
+                    <th colspan="2" class="head">Training Data</th>
+                </tr>
+                </thead>
+                <tr>
+                    <th>Inputs</th>
+                    <th>Outputs</th>
+                </tr>
+                <tr>
+                    <td>[0, 0]</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>[0, 1]</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>[1, 0]</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>[1, 1]</td>
+                    <td>0</td>
+                </tr>
+            </table>
+
+            <p>These inputs are trained on a neural network and the results are as follows:</p>
+
+            <div id="neural_selection">
+                <h4>Choose One</h4>
+                <span>[0, 0]</span>
+                <span>[0, 1]</span>
+                <span>[1, 0]</span>
+                <span>[1, 1]</span>
+                <h5>Output: <span class="output">-</span>
+            </div>
+
+            <script>
+                var nn = new NeuralNetwork(2, 3, 1);
+                var nnTraining = [
+                    {
+                    inputs: [0,0],
+                    targets: [0]
+                    },
+
+                    {
+                    inputs: [1,0],
+                    targets: [1]
+                    },
+
+                    {
+                    inputs: [0,1],
+                    targets: [1]
+                    },
+
+                    {
+                    inputs: [1,1],
+                    targets: [0]
+                    }
+                ];
+
+                for (var i = 0; i < 10000; i++) {
+                    var rand = Math.floor(Math.random() * 4);
+                    var data = nnTraining[rand];
+                    nn.train(data.inputs, data.targets);
+                }
+
+                $('#neural_selection span').on('click', function() {
+                    console.log($(this).text());
+                    var guess = 0;
+
+                    var choice = $(this).text();
+                    console.log(choice);
+                    switch (choice) {
+                        case "[0, 0]":
+                            guess = nn.feedforward([0, 0]);
+                            break;
+                        case "[0, 1]":
+                            guess = nn.feedforward([0, 1]);
+                            break;
+                        case "[1, 0]":
+                            guess = nn.feedforward([1, 0]);
+                            break;
+                        case "[1, 1]":
+                            guess = nn.feedforward([1, 1]);
+                            break;
+                    }
+
+                    $('#neural_selection .output').text(guess);
+                });
+            </script>
+
         </div>
     </body>
 </html>
