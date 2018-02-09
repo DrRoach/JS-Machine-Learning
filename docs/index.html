@@ -163,7 +163,7 @@
                     }
                 ];
 
-                for (var i = 0; i < 10000; i++) {
+                for (var i = 0; i < 100000; i++) {
                     var rand = Math.floor(Math.random() * 4);
                     var data = nnTraining[rand];
                     nn.train(data.inputs, data.targets);
