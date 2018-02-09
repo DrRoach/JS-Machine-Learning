@@ -21,7 +21,7 @@ class NeuralNetwork {
         this.bias_hidden.randomize();
         this.bias_output.randomize();
 
-        this.learningRate = 0.2;
+        this.learningRate = 0.1;
     }
 
     feedforward(input) {
