@@ -124,5 +124,14 @@ td {
 
 #neural_selection h5 {
     margin-top: 50px;
-    margin-bottom: 100px;
+    margin-bottom: 30px;
+}
+
+#neural_selection .train {
+    background: white;
+    width: 20%;
+    cursor: pointer;
+    margin: auto;
+    padding: 25px;
+    color: #1B1E24;
 }

@@ -136,6 +136,8 @@
                 <span>[0, 1]</span>
                 <span>[1, 0]</span>
                 <span>[1, 1]</span>
+                <h5>Times Trained: <div class="times_trained">0</div></h5>
+                <div class="train">Train 5,000 times</div>
                 <h5>Output: <span class="output">-</span>
             </div>
 
@@ -163,11 +165,6 @@
                     }
                 ];
 
-                for (var i = 0; i < 100000; i++) {
-                    var rand = Math.floor(Math.random() * 4);
-                    var data = nnTraining[rand];
-                    nn.train(data.inputs, data.targets);
-                }
 
                 $('#neural_selection span').on('click', function() {
                     console.log($(this).text());
@@ -191,6 +188,19 @@
                     }
 
                     $('#neural_selection .output').text(guess);
+                });
+
+                var timesTrained = 0;
+                $('#neural_selection .train').click(function() {
+                    for (var i = 0; i < 5000; i++) {
+                        var rand = Math.floor(Math.random() * 4);
+                        var data = nnTraining[rand];
+                        nn.train(data.inputs, data.targets);
+                    }
+
+                    timesTrained += 5000;
+
+                    $('#neural_selection .times_trained').text(timesTrained);
                 });
             </script>
 
