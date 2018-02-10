@@ -46,8 +46,12 @@ body {
     bottom: 10%;
 }
 
-.mt-25 {
-    margin-top: 25%!important;
+.pageDown {
+    margin-bottom: 25%;
+}
+
+.pageDown svg {
+    cursor: pointer;
 }
 
 h1 {
@@ -56,10 +60,6 @@ h1 {
 
 p {
     font-family: "Lato", sans-serif;
-}
-
-.example h3 {
-    text-align: center;
 }
 
 .example canvas {
@@ -148,12 +148,10 @@ td {
 }
 
 #neural_selection h4 {
-    margin-bottom: 30px;
 }
 
 #neural_selection span {
     background: #FFF;
-    padding: 20px;
     color: #1B1E24;
     margin-right: 10px;
     cursor: pointer;
@@ -161,7 +159,6 @@ td {
 
 #neural_selection h5 {
     margin-top: 50px;
-    margin-bottom: 30px;
 }
 
 #neural_selection .train {

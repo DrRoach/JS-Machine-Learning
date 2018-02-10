@@ -10,6 +10,7 @@
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
         <link href="css/main.css" type="text/css" rel="stylesheet">
+        <script src="js/scroller.js"></script>
 
         <script src="src/MachineLearning.js"></script>
         <script src="src/Matrix.js"></script>
@@ -18,7 +19,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
-        <div id="heading" class="container-fluid h-75">
+        <div id="heading" class="container-fluid h-75 page">
             <div class="row">
                 <div class="col-sm-8 offset-sm-1 col-xs-12">
                     <h1>JS Machine Learning Toolkit</h1>
@@ -51,10 +52,24 @@
             </div>
         </div>
 
-        <div class="example mt-25">
-            <h3>Simple Hill Climbing</h3>
+        <div>
+            <div class="pageDown col-xs-12 text-center mt-5">
+                <i class="fa fa-4x fa-chevron-down"></i>
+            </div>
+        </div>
+
+        <div class="example mt-25 page container">
+            <div class="row">
+                <div class="offset-md-1 col-md-11 col-sm-12">
+                    <h3>Simple Hill Climbing</h3>
+                </div>
+            </div>
     
-            <p>Hill climbing is a optimization technique used to find optimum values in large datasets. This technique can be applied to problems such as the travelling salesman issue.</p>
+            <div class="row">
+                <div class="col-md-10 offset-md-1 col-sm-12">
+                    <p>Hill climbing is a optimization technique used to find optimum values in large datasets. This technique can be applied to problems such as the travelling salesman issue.</p>
+                </div>
+            </div>
 
             <canvas id="simple_hill" width="500" height="300"></canvas>
             <div class="results">
@@ -98,7 +113,7 @@
             </script>
         </div>
 
-        <div class="example" id="bayes">
+        <div class="example page" id="bayes">
             <h3>Bayes Predictions</h3>
 
             <p>Bayes theorem implementation that is used to calculate outputs given a set of inputs. This technique can be applied to making predictions such as choosing the winner of a football match.</p>
@@ -125,7 +140,7 @@
             </script>
         </div>
 
-        <div class="example" id="neural_network">
+        <div class="example page" id="neural_network">
             <h3>Neural Networks</h3>
 
             <p>Neural networks can be trained to learn from a set of given inputs with their corresponsing outputs. As neural networks "learn" they see patterns that humans may not see.</p>
@@ -238,4 +253,12 @@
 
         </div>
     </body>
+    <script>
+        $(document).ready(function() {
+            scroller.setup({
+                scrollDown: '.pageDown',
+                speed: 900
+            });
+        });
+    </script>
 </html>
