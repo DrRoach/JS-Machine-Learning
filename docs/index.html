@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono|Roboto" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono|Roboto|Patrick+Hand+SC" rel="stylesheet"> 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -62,13 +62,13 @@
                 </div>
         
                 <div class="row">
-                    <div class="col-md-10 offset-md-1 col-sm-12">
+                    <div class="col-md-10 offset-md-1 col-sm-12 mt-5">
                         <p>Hill climbing is a optimization technique used to find optimum values in large datasets. This technique can be applied to problems such as the travelling salesman issue.</p>
                     </div>
                 </div>
 
-                <canvas id="simple_hill" class="img-responsive" width="400" height="300"></canvas>
-                <div class="row">
+                <canvas id="simple_hill" class="mt-5 img-responsive" width="400" height="300"></canvas>
+                <div class="row mt-5 results">
                     <div class="col-sm-3 offset-sm-3 col-xs-12 text-center">
                         <h5>Optima: <span class="optima">0</span></h5>
                     </div>
@@ -108,23 +108,44 @@
                     }
 
                     var results = $('#simple_hill').parent().find('.results');
-                    results.find('.optima').html(run.optima);
-                    results.find('.iterations').html(run.path.length);
+                    results.find('.optima').text(run.optima);
+                    results.find('.iterations').text(run.path.length);
                 </script>
             </div>
 
-            <div class="example section" id="bayes">
-                <h3>Bayes Predictions</h3>
-
-                <p>Bayes theorem implementation that is used to calculate outputs given a set of inputs. This technique can be applied to making predictions such as choosing the winner of a football match.</p>
-
-                <p>Test data used are 10 fixtures between Manchester United and Manchester City. First game was on 8 Apr 2013, last game was 27 Apr 2017</p>
-                <div class="results">
-                    <h5>Probability: <span class="optima">0</span></h5>
-                    <h5>Output: <span class="iterations">0</span></h5>
+            <div class="example section container" id="bayes">
+                <div class="row">
+                    <div class="offset-md-1 col-md-11 col-sm-12">
+                        <h3>Bayes Predictions</h3>
+                    </div>
                 </div>
-                <div class="clear"></div>
-                <p>The correct outcome for the match was L for Manchester United. The outcome games was played 10 Dec 2017</p>
+
+                <div class="row">
+                    <div class="col-md-10 offset-md-1 col-sm-12 mt-5">
+                        <p>Bayes theorem implementation that is used to calculate outputs given a set of inputs. This technique can be applied to making predictions such as choosing the winner of a football match.</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10 offset-md-1 col-sm-12 mt-5">
+                        <p>Test data used are 10 fixtures between Manchester United and Manchester City. First game was on 8 Apr 2013, last game was 27 Apr 2017</p>
+                    </div>
+                </div>
+
+                <div class="row mt-5 results">
+                        <div class="col-sm-3 offset-sm-3 col-xs-12 text-center">
+                            <h5>Probability: <span class="optima">0</span></h5>
+                        </div>
+                        <div class="col-sm-3 col-xs-12 text-center">
+                            <h5>Output: <span class="iterations">0</span></h5>
+                        </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10 offset-md-1 col-sm-12 mt-5">
+                        <p>The correct outcome for the match was L for Manchester United. The outcome games was played 10 Dec 2017</p>
+                    </div>
+                </div>
 
                 <script>
                     var ml = new MachineLearning();
@@ -140,52 +161,105 @@
                 </script>
             </div>
 
-            <div class="example section" id="neural_network">
-                <h3>Neural Networks</h3>
+            <div class="example section container" id="neural_network">
+                <div class="row">
+                    <div class="offset-md-1 col-md-11 col-sm-12">
+                        <h3>Neural Networks</h3>
+                    </div>
+                </div>
 
-                <p>Neural networks can be trained to learn from a set of given inputs with their corresponsing outputs. As neural networks "learn" they see patterns that humans may not see.</p>
+                <div class="row">
+                    <div class="col-md-10 offset-md-1 col-sm-12 mt-3">
+                        <p>Neural networks can be trained to learn from a set of given inputs with their corresponsing outputs. As neural networks "learn" they see patterns that humans may not see.</p>
+                    </div>
+                </div>
 
-                <p>The following example shows how a neural network can be trained to learn the outcomes of a XOR gate.</p>
+                <div class="row">
+                    <div class="col-md-10 offset-md-1 col-sm-12 mt-3">
+                        <p>The following example shows how a neural network can be trained to learn the outcomes of a XOR gate.</p>
+                    </div>
+                </div>
 
-                <table>
-                    <thead>
+                <div class="col-md-8 offset-md-2 col-sm-12">
+                <table class="table">
+                    <thead class="thead-dark">
                     <tr>
-                        <th colspan="2" class="head">Training Data</th>
+                        <th colspan="3" scope="col" class="head">Training Data</th>
                     </tr>
                     </thead>
                     <tr>
-                        <th>Inputs</th>
-                        <th>Outputs</th>
+                        <th scope="col">#</th>
+                        <th scope="col">Inputs</th>
+                        <th scope="col">Outputs</th>
                     </tr>
                     <tr>
+                        <td scope="row">1</td>
                         <td>[0, 0]</td>
                         <td>0</td>
                     </tr>
                     <tr>
+                        <td scope="row">2</td>
                         <td>[0, 1]</td>
                         <td>1</td>
                     </tr>
                     <tr>
+                        <td scope="row">3</td>
                         <td>[1, 0]</td>
                         <td>1</td>
                     </tr>
                     <tr>
+                        <td scope="row">4</td>
                         <td>[1, 1]</td>
                         <td>0</td>
                     </tr>
                 </table>
+                </div>
 
-                <p>These inputs are trained on a neural network and the results are as follows:</p>
+                <div class="row">
+                    <div class="col-md-10 offset-md-1 col-sm-12 mt-5">
+                        <p>These inputs are trained on a neural network and the results are as follows:</p>
+                    </div>
+                </div>
 
                 <div id="neural_selection">
+                <div class="row">
+                    <div class="col-sm-10 offset-sm-1">
                     <h4>Choose One</h4>
-                    <span>[0, 0]</span>
-                    <span>[0, 1]</span>
-                    <span>[1, 0]</span>
-                    <span>[1, 1]</span>
-                    <h5>Times Trained: <div class="times_trained">0</div></h5>
-                    <div class="train">Train 5,000 times</div>
-                    <h5>Output: <span class="output">-</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3 col-md-2 offset-md-2 col-xs-6 offset-xs-3">
+                        <button class="box_lined_thick selection">[0, 0]</button>
+                    </div>
+                    <div class="col-sm-3 col-md-2 col-xs-6">
+                        <button class="box_lined_thick selection">[1, 0]</button>
+                    </div>
+                    <div class="col-sm-3 col-md-2 col-xs-6">
+                        <button class="box_lined_thick selection">[0, 1]</button>
+                    </div>
+                    <div class="col-sm-3 col-md-2 col-xs-6">
+                        <button class="box_lined_thick selection">[1, 1]</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10 offset-md-1 mt-3">
+                        <h4>Times Trained: <span class="times_trained">0</span></h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4 offset-sm-4">
+                        <button class="box_lined_thick train">Train 5,000 times</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                        <h5>Output: <span class="output">-</span></h5>
+                    </div>
+                </div>
                 </div>
 
                 <script>
@@ -213,12 +287,10 @@
                     ];
 
 
-                    $('#neural_selection span').on('click', function() {
-                        console.log($(this).text());
+                    $('#neural_selection .selection').on('click', function() {
                         var guess = 0;
 
                         var choice = $(this).text();
-                        console.log(choice);
                         switch (choice) {
                             case "[0, 0]":
                                 guess = nn.feedforward([0, 0]);
