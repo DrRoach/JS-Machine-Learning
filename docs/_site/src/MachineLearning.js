@@ -20,8 +20,6 @@ function MachineLearning() {
         for (var i = 0; i < inputs.length; i++) {
             // Loop through each of our training data
             for (var x = 0; x < inputs[i].length; x++) {
-                console.log("x: " + x + " y: " + inputs[i][x]);
-
                 // Store our table
                 if (typeof freqTables[inputs[i][x]] == "undefined") {
                     freqTables[inputs[i][x]] = [];
@@ -31,8 +29,6 @@ function MachineLearning() {
                 freqTables[inputs[i][x]].push(outputs[x]);
 
             }
-
-            console.log(freqTables);
         }
 
         for (var i = 0; i < outputs.length; i++) {
@@ -46,7 +42,6 @@ function MachineLearning() {
         // Loop through each of our outputs
         var probabilities = [];
         for (var r = 0; r < posOutputs.length; r++) {
-            console.log("POS: " + posOutputs[r]);
             var total = 0;
             var prob = 0;
             var outSeen = 0;
@@ -57,8 +52,6 @@ function MachineLearning() {
                 // Sum up our probabilities
                 for (var y = 0; y < freqTables[Object.keys(freqTables)[x]].length; y++) {
                     total++;
-
-                    console.log(freqTables[Object.keys(freqTables)[x]]);
 
                     if (freqTables[Object.keys(freqTables)[x]][y] == posOutputs[r] && Object.keys(freqTables)[x] == predInput[0]) {
                         outSelected++;
@@ -83,16 +76,9 @@ function MachineLearning() {
             ];
 
             probabilities.push(probsBuilder);
-
-
-                console.log("total: " + total);
-                console.log("outSeen: " + outSeen);
-            console.log("outSelected: " + outSelected);
-            console.log(prob);
         }
+
         var tableValues = freqTables[predInput];
-        console.log("probabilities");
-        console.log(probabilities);
 
         var predIndex = 0;
         var predProb = 0.0;
