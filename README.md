@@ -1,6 +1,8 @@
 # JS Machine Learnering
 JS Machine Learning or JSML is a simple JavaScript machine learning toolkit. It's a small little pet project of mine and It's aim is to provide a range of different machine learning techniques which can easily be used either for educational use or real world problems.
 
+[View Demos](https://drroach.github.io/JS-Machine-Learning/)
+
 ## Hill Climbing
 Hill climbing is a optimization technique used to find optimum values in large datasets. This technique can be applied to problems such as the travelling salesman issue [more here](https://en.wikipedia.org/wiki/Travelling_salesman_problem).
 
