@@ -97,3 +97,7 @@ button {
     margin-right: 10px;
     cursor: pointer;
 }
+
+.half_top {
+    padding-top: 5%;
+}
