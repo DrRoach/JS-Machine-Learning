@@ -46,20 +46,21 @@ body {
     bottom: 10%;
 }
 
-.pageDown {
-    margin-bottom: 25%;
-}
-
-.pageDown svg {
-    cursor: pointer;
-}
-
 h1 {
     font-family: "Roboto Mono", sans-serif;
 }
 
 p {
     font-family: "Lato", sans-serif;
+}
+
+.container {
+    max-width: 100%;
+}
+
+.example {
+    height: 100%;
+    padding-top: 10%;
 }
 
 .example canvas {
@@ -83,66 +84,6 @@ p {
     clear: both;
 }
 
-table {
-    background: white;
-    border-radius: 3px;
-    border-collapse: collapse;
-    height: 320px;
-    margin: auto;
-    max-width: 600px;
-    padding: 5px;
-    width: 100%;
-}
-
-table th {
-    color: #D5DDE5;
-    background: #1B1E24;
-    border-bottom: 4px solid #9ea7af;
-    border-right: 1px solid #343a45;
-    font-size: 1.1em;
-    font-weight: 100;
-    padding: 24px;
-    text-align: left;
-    vertical-align: middle;
-}
-
-table th.head {
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    border-bottom: 2px solid #9EA7AF;
-    border-top: none;
-}
-
-tr {
-    border-top: 1px solid #C1C3D1;
-    border-bottom: 1px solid #C1C3D1;
-    color: #666B85;
-    font-weight: normal;
-    text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
-}
-
-tr:first-child {
-    border-top: none;
-}
-
-tr:last-child {
-    border-bottom: none;
-}
-
-tr:nth-child(odd) td {
-    background: #EBEBEB;
-}
-
-td {
-    background: #FFF;
-    padding: 20px;
-    text-align: left;
-    vertical-align: middle;
-    font-weight: 300;
-    border-right: 1px solid #C1C3D1;
-    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-}
-
 #neural_selection {
     text-align: center;
 }
@@ -155,10 +96,6 @@ td {
     color: #1B1E24;
     margin-right: 10px;
     cursor: pointer;
-}
-
-#neural_selection h5 {
-    margin-top: 50px;
 }
 
 #neural_selection .train {
