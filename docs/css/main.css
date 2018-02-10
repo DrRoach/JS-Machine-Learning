@@ -1,22 +1,61 @@
 html {
-    background: #3E94EC;;
-    color: #FFF;
+    background: #FFF;
     font-family: "Roboto", sans-serif;
-    font-size: 300;
+    height: 100%;
 }
 
+body {
+    height: 100%;
+}
+
+#heading {
+    background: #3E94EC;
+    color: #FFF;
+    position: relative;
+    min-height: 500px;
+}
+
+#heading h1 {
+    padding-top: 20%;
+}
+
+#heading h4 {
+    line-height: 1;
+}
+
+#heading .two_line_1 {
+    color: #9DFA32;
+}
+
+#heading .two_line_2 {
+    color: #A83BED;
+}
+
+#heading hr {
+    height: 4px;
+    background: #FFF;
+}
+
+#heading svg {
+    color: #212529;
+    cursor: pointer;
+}
+
+#heading .bottom_anchor {
+    position: absolute;
+    bottom: 10%;
+}
+
+.mt-25 {
+    margin-top: 25%!important;
+}
 
 h1 {
     font-family: "Roboto Mono", sans-serif;
-    text-align: center;
 }
 
 p {
-    width: 80%;
-    margin-left: 10%;
-    text-align: center;
     font-family: "Lato", sans-serif;
-    font-size: 1.1em;
 }
 
 .example h3 {
@@ -78,7 +117,6 @@ tr {
     border-top: 1px solid #C1C3D1;
     border-bottom: 1px solid #C1C3D1;
     color: #666B85;
-    font-size: 1em;
     font-weight: normal;
     text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
 }
@@ -101,7 +139,6 @@ td {
     text-align: left;
     vertical-align: middle;
     font-weight: 300;
-    font-size: 1em;
     border-right: 1px solid #C1C3D1;
     text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
 }
