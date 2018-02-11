@@ -1,4 +1,4 @@
-# JS Machine Learnering
+# JS Machine Learning
 JS Machine Learning or JSML is a simple JavaScript machine learning toolkit. It's a small little pet project of mine and It's aim is to provide a range of different machine learning techniques which can easily be used either for educational use or real world problems.
 
 [View Demos](https://drroach.github.io/JS-Machine-Learning/)
